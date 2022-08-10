@@ -9,9 +9,9 @@
 #define Application_h
 
 #include <stdio.h>
-#include "mlMiniEngine.h"
+#include "mlMicroEngine.h"
 
-class Application : public mlMiniEngine{
+class Application : public mlMicroEngine{
 public:
     Application();
     ~Application();

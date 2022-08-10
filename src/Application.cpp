@@ -18,18 +18,20 @@ Application::~Application(){
 
 void Application::Update(){
     // Update code
+
+    // Add gravity
     dy += gravity;
     
+    // Cap speed
+    if(dx > maxSpeed) dx = maxSpeed;
+    if(dy > maxSpeed) dy = maxSpeed;
+
     theRect.x += dx;
     theRect.y += dy;
-    
-    if(dy > maxSpeed){
-        dy = maxSpeed;
-    }
 
-    if(theRect.y > floor){
-        dy = - dy;
-    }
+    //Floor collision
+    if(theRect.y > floor) dy = - dy;
+    
 }
 
 void Application::Draw(){
@@ -38,7 +40,7 @@ void Application::Draw(){
     SDL_SetRenderDrawColor(mpRenderer, 0x00, 0x00, 0x00, 0xff);
     SDL_RenderClear(mpRenderer);
     
-    SDL_SetRenderDrawColor(mpRenderer, 0x00, 0xff, 0xff, 0xff);
+    SDL_SetRenderDrawColor(mpRenderer, 0x00, 0xff, 0x00, 0xff);
     SDL_RenderFillRect(mpRenderer, &theRect);
 }
 

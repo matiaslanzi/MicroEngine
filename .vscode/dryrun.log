@@ -1,5 +1,5 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/matiaslanzi/Github/MicroEngine'
-g++ -std=c++14 -Wall -O0 -g -lSDL2 -Iinclude -Llib  -o build/debug/MicroEngine.app
+clang++ -std=c++17 -Wall -O0 -g -lsdl2 -Iinclude -Llib src/Application.cpp src/main.cpp src/mlMicroEngine.cpp -o build/debug/MicroEngine.app
 make: Leaving directory `/Users/matiaslanzi/Github/MicroEngine'
  

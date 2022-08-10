@@ -1,17 +1,16 @@
 //
-//  mlMiniEngine.hpp
-//  SDLTest
+//  mlMicroEngine.h
 //
 //  Created by Matias Lanzi on 8/9/22.
 //
 
-#ifndef mlMiniEngine_h
-#define mlMiniEngine_h
+#ifndef mlMicroEngine_h
+#define mlMicroEngine_h
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
-class mlMiniEngine{
+class mlMicroEngine{
 
 public:
     SDL_Window*     mpWindow = nullptr;
@@ -23,8 +22,8 @@ public:
     Uint32  miFrameFinish = 0;          // Last frame finish time
     Uint32  miFrameCount = 0;           // Accumulative counter
     
-    mlMiniEngine();
-    virtual ~mlMiniEngine(){};
+    mlMicroEngine();
+    virtual ~mlMicroEngine(){};
     
     virtual void Update() = 0;
     virtual void Draw() = 0;
@@ -35,4 +34,4 @@ private:
     bool    mRunning = false;
 };
 
-#endif /* mlMiniEngine_h */
+#endif /* mlMicroEngine_h */

@@ -17,3 +17,8 @@ LIBRARY_PATHS = -Llib
 # Compile command
 all:
 	$(CC) $(COMPILER_FLAGS) $(LINKER_FLAGS) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(SRC_FILES) -o $(BUILD_DIR)/$(OBJ_NAME).app
+
+clean:
+	rm -f $(BUILD_DIR)/$(OBJ_NAME).app
+	rm -fR $(BUILD_DIR)/$(OBJ_NAME).app.dSYM
+	

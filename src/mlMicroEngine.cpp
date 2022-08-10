@@ -1,5 +1,5 @@
 //
-//  mlMiniEngine.cpp
+//  mlMicroEngine.cpp
 //  SDLTest
 //
 //  Created by Matias Lanzi on 8/9/22.
@@ -8,16 +8,16 @@
 // than can get me going quicly without much fuzz.
 // Read the docs for details.
 
-#include "mlMiniEngine.h"
+#include "mlMicroEngine.h"
 
 /* ----- Constructor ----- */
-mlMiniEngine::mlMiniEngine(){
+mlMicroEngine::mlMicroEngine(){
     
-    printf("mlMiniEngine: Started");
+    printf("mlMicroEngine: Started");
     
     // Init SDL
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
-        printf("mlMiniEngine: Can't initialize SDL.\n%s", SDL_GetError());
+        printf("mlMicroEngine: Can't initialize SDL.\n%s", SDL_GetError());
         exit(-1);
     }
     
@@ -29,7 +29,7 @@ mlMiniEngine::mlMiniEngine(){
                                 480,
                                 SDL_WINDOW_SHOWN);
     if(!mpWindow){
-        printf("mlMiniEngine: Can't create SDL window.\n%s", SDL_GetError());
+        printf("mlMicroEngine: Can't create SDL window.\n%s", SDL_GetError());
         exit(-1);
     }
     
@@ -37,7 +37,7 @@ mlMiniEngine::mlMiniEngine(){
     mpRenderer = SDL_CreateRenderer(mpWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     
     if(!mpWindow){
-        printf("mlMiniEngine: Can't create SDL renderer.\n%s", SDL_GetError());
+        printf("mlMicroEngine: Can't create SDL renderer.\n%s", SDL_GetError());
         exit(-1);
     }
     
@@ -57,7 +57,7 @@ mlMiniEngine::mlMiniEngine(){
 
 
 /* ----- Run loop ----- */
-void mlMiniEngine::Runloop(){
+void mlMicroEngine::Runloop(){
     
     // Run the loop
     while (mRunning) {
