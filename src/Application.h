@@ -25,7 +25,6 @@ private:
     int floor = 370;
     float gravity = .8f;
     
-    SDL_Rect    mBoxRect{320,40,100,100};
     float   dx, dy = 0;
     float   maxSpeed = 20;
     
