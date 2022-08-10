@@ -1,10 +1,15 @@
 # MicroEngine
-This is a first pass at attempting to make a basic mini game engine with SDL that can get me going quicly without much fuzz. For now is very basic, but it will get you going with a decent timing mechanism and delta time in milliseconds.
+This is a first iteration a basic mini game engine with SDL that can get me going quicly without much fuzz. 
+For now is very basic, but it will get you going with a decent timing mechanism and delta time in milliseconds.
 I will add more functionality shortly, please drop me a line if you have a any questions or suggestions. 
 I would love to have another point of view about the timing.
 
 Cheers 
-~matiaslanzi
+
+@matiaslanzi
+
+[www.matiaslanzi.com](https://matiaslanzi.com)
+
 
 ## Implementing
 Subclass `mlMicroEngine` class, provide the required virtual functions and that's that.
