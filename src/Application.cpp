@@ -1,19 +1,17 @@
 //
 //  Application.cpp
-//  SDLTest
 //
 //  Created by Matias Lanzi on 8/9/22.
 //
-// Write your game here.
+// This is the application, this is where you write your game code.
+// The constructor get called once, Update() and Draw() get called at 
+// the defined frame rate in mlMicroEngine.h
+//
 
 #include "Application.h"
 
 Application::Application(){
     // Initialize mVars here
-}
-
-Application::~Application(){
-    // Clean up
 }
 
 void Application::Update(){
@@ -22,7 +20,7 @@ void Application::Update(){
     // Add gravity
     dy += gravity;
     
-    // Cap speed
+    // Cap frame rate
     if(dx > maxSpeed) dx = maxSpeed;
     if(dy > maxSpeed) dy = maxSpeed;
 
@@ -44,3 +42,16 @@ void Application::Draw(){
     SDL_RenderFillRect(mpRenderer, &theRect);
 }
 
+Application::~Application(){
+    if(mpRenderer){
+        SDL_DestroyRenderer(mpRenderer);
+        mpRenderer = nullptr;
+    }
+
+    if(mpWindow){
+        SDL_DestroyWindow(mpWindow);
+        mpWindow = nullptr;
+    }
+
+    SDL_Quit();
+}

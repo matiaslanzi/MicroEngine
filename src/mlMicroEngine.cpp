@@ -1,20 +1,20 @@
 //
 //  mlMicroEngine.cpp
-//  SDLTest
 //
 //  Created by Matias Lanzi on 8/9/22.
 //
-// This is a first pass at attempting to make a simple mini engine
-// than can get me going quicly without much fuzz.
+// This is a first pass at attempting to make a basic mini game engine
+// with SDL that can get me going quicly without much fuzz.
+// You should be able to compile this in any platform with make.
 // Read the docs for details.
+// https://github.com/matiaslanzi/MicroEngine
 
 #include "mlMicroEngine.h"
 
 /* ----- Constructor ----- */
 mlMicroEngine::mlMicroEngine(){
-    
-    printf("mlMicroEngine: Started");
-    
+    // TODO: @matiaslanzi Overload the constructor to take parameters x, y, framerate and title.
+
     // Init SDL
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
         printf("mlMicroEngine: Can't initialize SDL.\n%s", SDL_GetError());
@@ -49,12 +49,6 @@ mlMicroEngine::mlMicroEngine(){
     
     mRunning = true;
 }
-
-
-
-
-
-
 
 /* ----- Run loop ----- */
 void mlMicroEngine::Runloop(){
