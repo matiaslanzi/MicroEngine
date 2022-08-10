@@ -28,5 +28,11 @@ Use make from the project root.
 ## Dependencies
 So far it's using only SDL2, I will add SDL2_mixer, SDL2_image, SDL2_ttf, etc, so make sure you include do your linking.
 
+## Contributions
+Please feel free to contribute to this project.
+I marked with 'TODO:' the stuff that can be made better and of courne any ideas are welcome.
+The main idea is to kepp this MicroEngine small.
+If you want more bells and whistles please look at [LittleEngine Repository](https://github.com/matiaslanzi/LittleEngine) this is a more complete OO implementation of a simple game angine.
+
 Hope this is as useful for you as it was for me writing it. I claim no status in these programming matters other than longevity. I am just having fun. I love C++ and my only hope is to continue learning. 
 Thanks
