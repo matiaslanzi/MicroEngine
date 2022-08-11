@@ -12,6 +12,13 @@
 
 Application::Application(){
     // Initialize mVars here
+    
+    theRect = {100,100,100,100};
+    floor = 370;
+    gravity = .8f;
+    dx = 0; 
+    dy = 0;
+    maxSpeed = 20;
 }
 
 void Application::Update(){
@@ -54,4 +61,17 @@ Application::~Application(){
     }
 
     SDL_Quit();
+}
+
+int main(int argc, const char * argv[]) {
+    
+    Application* myApplication = new Application();
+
+    myApplication->Runloop();
+    
+    delete myApplication;
+
+    myApplication = nullptr;
+    
+    return 0;
 }

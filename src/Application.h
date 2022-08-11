@@ -21,13 +21,13 @@ public:
     
 private:
     // TODO: @matiaslanzi Initializing here might be bad
-    SDL_Rect theRect = {100,100,100,100};
+    SDL_Rect theRect;
     
-    int floor = 370;
-    float gravity = .8f;
+    int     floor;
+    float   gravity;
     
-    float   dx, dy = 0;
-    float   maxSpeed = 20;
+    float   dx, dy;
+    float   maxSpeed;
     
 };
 

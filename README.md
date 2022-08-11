@@ -14,9 +14,7 @@ There a are 3 files in the project:
 
 `mlMicroEngine.cpp` is the one to subclass
 
-`Application.cpp` is where you will implement your code
-
-`main.cpp` is the entry point, creates the object and enters the game loop
+`Application.cpp` is where you will implement your code and where `main` is located.
 
 Take a look at those files, you'll get it right away.
 
