@@ -11,11 +11,12 @@
 #include <stdio.h>
 #include "mlMicroEngine.h"
 
-class Application : public mlMicroEngine{
+class Application : public mlME::mlMicroEngine{
 public:
     Application();
     ~Application();
 
+    void Input();
     void Update();
     void Draw();
     

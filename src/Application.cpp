@@ -21,8 +21,20 @@ Application::Application(){
     maxSpeed = 20;
 }
 
+void Application::Input(){
+    // Fires only if an event is available
+    switch (mEvent.type)
+    {
+    case SDLK_ESCAPE:
+        Quit();
+        break;
+    
+    default:
+        break;
+    }
+}
+
 void Application::Update(){
-    // Update code
 
     // Add gravity
     dy += gravity;
@@ -40,7 +52,6 @@ void Application::Update(){
 }
 
 void Application::Draw(){
-    //Draw code
 
     SDL_SetRenderDrawColor(mpRenderer, 0x00, 0x00, 0x00, 0xff);
     SDL_RenderClear(mpRenderer);
