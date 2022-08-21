@@ -147,6 +147,8 @@ namespace mlME{
                 
                 Update();
 
+                SDL_SetRenderDrawColor(mpRenderer, 0x00, 0x00, 0x00, 0x00);
+                SDL_RenderClear(mpRenderer);
                 Draw();
                 SDL_RenderPresent(mpRenderer);
                 

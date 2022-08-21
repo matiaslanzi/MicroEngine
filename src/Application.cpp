@@ -11,56 +11,63 @@
 #include "Application.h"
 
 Application::Application(){
-    // Initialize mVars here
-    
-    theRect = {100,100,100,100};
-    floor = 370;
-    gravity = .8f;
-    dx = 0; 
-    dy = 0;
-    maxSpeed = 20;
+
+    mPlayer.rect.x = 100;
+    mPlayer.coll = 1;   // Collides with all
+
+    mGround.rect.x = 0;
+    mGround.rect.y = 400;
+    mGround.rect.w = 8*64;
+    mPlayer.coll = 1;
 }
 
 void Application::Input(){
     // Fires only if an event is available
-    switch (mEvent.type)
-    {
-    case SDLK_ESCAPE:
-        Quit();
-        break;
-    
-    default:
-        break;
+
+    // Handle events
+    switch (mEvent.type){
+        case SDLK_ESCAPE:
+            Quit();
+            break;
+        
+        default:
+            break;
     }
 }
 
 void Application::Update(){
 
     // Add gravity
-    dy += gravity;
-    
-    // Cap frame rate
-    if(dx > maxSpeed) dx = maxSpeed;
-    if(dy > maxSpeed) dy = maxSpeed;
+    mPlayer.dy += cGravity;
 
-    theRect.x += dx;
-    theRect.y += dy;
+    // Check collisions
 
-    //Floor collision
-    if(theRect.y > floor) dy = - dy;
-    
+    // Update position
+    mPlayer.rect.x += mPlayer.dx;
+    mPlayer.rect.y += mPlayer.dy;
 }
+
+
+
 
 void Application::Draw(){
 
-    SDL_SetRenderDrawColor(mpRenderer, 0x00, 0x00, 0x00, 0xff);
-    SDL_RenderClear(mpRenderer);
-    
-    SDL_SetRenderDrawColor(mpRenderer, 0x00, 0xff, 0x00, 0xff);
-    SDL_RenderFillRect(mpRenderer, &theRect);
+    // Render object
+    SDL_SetRenderDrawColor(mpRenderer, mGround.color.r, mGround.color.g, mGround.color.b, mGround.color.a);
+    SDL_RenderDrawRect(mpRenderer, &mGround.rect);
+
+
+    //Render Player
+    SDL_SetRenderDrawColor(mpRenderer, mPlayer.color.r, mPlayer.color.g,mPlayer.color.b, mPlayer.color.a);
+    SDL_RenderDrawRect(mpRenderer, &mPlayer.rect);
 }
 
+
+
+
+
 Application::~Application(){
+    
     if(mpRenderer){
         SDL_DestroyRenderer(mpRenderer);
         mpRenderer = nullptr;
