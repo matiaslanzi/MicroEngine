@@ -15,6 +15,7 @@ Application::Application(){
     mPlayer.rect.x = 100;
     mPlayer.coll = 1;   // Collides with all
 
+
     mGround.rect.x = 0;
     mGround.rect.y = 400;
     mGround.rect.w = 8*64;
