@@ -59,6 +59,7 @@ void Application::Update(){
     if(checkCollisions(mPlayer.rect, mGround.rect)){
         mPlayer.dy = -mPlayer.dy;
         mPlayer.FALLING = false;
+        mPlayer.GROUNDED = true;
         mPlayer.dy = 0;
         mPlayer.rect.y = mGround.rect.y - mPlayer.rect.h;
     }
@@ -67,17 +68,21 @@ void Application::Update(){
     if(mPlayer.JUMP){
         mPlayer.dy = -mPlayer.jumpVel;
         mPlayer.FALLING = true;
+        mPlayer.GROUNDED = false;
+
         mPlayer.JUMP = false;
     }
 
     // Move
     if(mDir == mlME::LEFT){
-        mPlayer.dx -= 10;
+        mPlayer.dx -= mPlayer.latVel;
+
         mDir = mlME::NONE;
     }
 
     if(mDir == mlME::RIGHT){
-        mPlayer.dx += 10;
+        mPlayer.dx += mPlayer.latVel;
+
         mDir = mlME::NONE;
     }
 

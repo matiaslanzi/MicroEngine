@@ -32,6 +32,7 @@ private:
         float       dxMax = 50;         // Maximum x velocity
         float       dyMax = 50;         // Maximum y velocity
         float       jumpVel = 50;       // Jump velocity
+        float       latVel  = 10;       // Lateral velocity
 
         SDL_Color color = {0xff, 0xff, 0xff, 0xff};     // The draw color
 
@@ -40,6 +41,7 @@ private:
 
         bool FALLING = false;
         bool JUMP = false;
+        bool GROUNDED = false;
         
     };
 
