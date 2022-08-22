@@ -15,12 +15,13 @@ Application::Application(){
     mPlayer.rect.x = 100;
     mPlayer.rect.y = 80;
     mPlayer.rect.h = 8*2;
+    mPlayer.jumpVel = 20;
     mPlayer.coll = 1;   // Collides with all
 
 
     mGround.rect.x = 0;
     mGround.rect.y = 400;
-    mGround.rect.w = 8*64;
+    mGround.rect.w = 8*80;
     mPlayer.coll = 1;
 
     if(!checkCollisions(mPlayer.rect, mGround.rect)) mPlayer.FALLING = true;
@@ -35,7 +36,18 @@ void Application::Input(){
         case SDLK_ESCAPE:
             Quit();
             break;
-        
+        case SDLK_SPACE:
+        case SDLK_w:
+            mPlayer.JUMP = true;
+            break;
+        case SDLK_a:
+        case SDLK_LEFT:
+            mDir = mlME::LEFT;
+            break;
+        case SDLK_d:
+        case SDLK_RIGHT:
+            mDir = mlME::RIGHT;
+            break;
         default:
             break;
     }
@@ -45,10 +57,31 @@ void Application::Update(){
 
     // Check collisions
     if(checkCollisions(mPlayer.rect, mGround.rect)){
-        
         mPlayer.dy = -mPlayer.dy;
-        
+        mPlayer.FALLING = false;
+        mPlayer.dy = 0;
+        mPlayer.rect.y = mGround.rect.y - mPlayer.rect.h;
     }
+
+    // Jump
+    if(mPlayer.JUMP){
+        mPlayer.dy = -mPlayer.jumpVel;
+        mPlayer.FALLING = true;
+        mPlayer.JUMP = false;
+    }
+
+    // Move
+    if(mDir == mlME::LEFT){
+        mPlayer.dx -= 10;
+        mDir = mlME::NONE;
+    }
+
+    if(mDir == mlME::RIGHT){
+        mPlayer.dx += 10;
+        mDir = mlME::NONE;
+    }
+
+    
 
     // Add gravity
     if(mPlayer.FALLING) mPlayer.dy += cGravity;
@@ -56,6 +89,13 @@ void Application::Update(){
     // Limit speed
     if(mPlayer.dx > mPlayer.dxMax) mPlayer.dx = mPlayer.dxMax;
     if(mPlayer.dy > mPlayer.dyMax) mPlayer.dy = mPlayer.dyMax;
+
+    // Drag
+    mPlayer.dx *= 0.95f;
+
+    // Stay in bounds
+    if(mPlayer.rect.x + mPlayer.rect.w >= 640) mPlayer.dx = -mPlayer.dx;
+    if(mPlayer.rect.x <= 0) mPlayer.dx = -mPlayer.dx;
 
     // Update position
     mPlayer.rect.x += mPlayer.dx * miDeltaTime * 0.01f;

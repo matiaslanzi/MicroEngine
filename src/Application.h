@@ -29,8 +29,9 @@ private:
         SDL_Rect    rect = {0,0,8,8};   // The object's rect
         float       dx = 0.0f;          // delta x is the rate of change for x
         float       dy = 0.0f;          // delta y is the rate of change for y
-        float       dxMax = 50;
-        float       dyMax = 50;
+        float       dxMax = 50;         // Maximum x velocity
+        float       dyMax = 50;         // Maximum y velocity
+        float       jumpVel = 50;       // Jump velocity
 
         SDL_Color color = {0xff, 0xff, 0xff, 0xff};     // The draw color
 
@@ -38,6 +39,8 @@ private:
         int    coll = true;
 
         bool FALLING = false;
+        bool JUMP = false;
+        
     };
 
     struct MEEntity mPlayer;

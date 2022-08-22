@@ -54,14 +54,15 @@ https://github.com/matiaslanzi/MicroEngine
 
 namespace mlME{
 
-    enum{UP,DOWN,LEFT,RIGHT};
+    enum direction {NONE, UP, DOWN, LEFT, RIGHT};
 
     class mlMicroEngine{
 
     public:
         SDL_Window*     mpWindow = nullptr;
-        SDL_Renderer*   mpRenderer = nullptr;
-        SDL_Event       mEvent;
+        SDL_Renderer*   mpRenderer = nullptr;   
+        SDL_Event       mEvent;                 // The event
+        Uint32          mDir;                   // Move directions
         
         float       mfSkipTicks = 1000/60;      // Frame rate
         Uint32      miDeltaTime = 0;            // Time between frames, use this to compensate for timing.
