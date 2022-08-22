@@ -22,26 +22,22 @@ public:
     void Draw();
     
 private:
-    float const cGravity = 1.98f;
+    float const cGravity = 0.98f;
 
     struct MEEntity{
 
-        SDL_Rect rect = {0,0,8,8};  // The object's rect
-        float   dx = 0.0f;  // delta x is the rate of change for x
-        float   dy = 0.0f;  // delta y is the rate of change for y
+        SDL_Rect    rect = {0,0,8,8};   // The object's rect
+        float       dx = 0.0f;          // delta x is the rate of change for x
+        float       dy = 0.0f;          // delta y is the rate of change for y
+        float       dxMax = 50;
+        float       dyMax = 50;
 
         SDL_Color color = {0xff, 0xff, 0xff, 0xff};     // The draw color
 
         // Collisions 0 = no collisions, 1 = collides, > 1 collision groups.
         int    coll = true;
 
-        // Here I define some flags, feel free to use any other method or add
-        // any needed flags.
-        bool    TOUCHGROUND = false;
-        bool    GROUNDED = false;
-        bool    JUMPING = false;
-        bool    FIRING = false;
-        bool    FALLING = false;
+        bool FALLING = false;
     };
 
     struct MEEntity mPlayer;

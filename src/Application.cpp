@@ -13,6 +13,8 @@
 Application::Application(){
 
     mPlayer.rect.x = 100;
+    mPlayer.rect.y = 80;
+    mPlayer.rect.h = 8*2;
     mPlayer.coll = 1;   // Collides with all
 
 
@@ -20,13 +22,16 @@ Application::Application(){
     mGround.rect.y = 400;
     mGround.rect.w = 8*64;
     mPlayer.coll = 1;
+
+    if(!checkCollisions(mPlayer.rect, mGround.rect)) mPlayer.FALLING = true;
+    
 }
 
 void Application::Input(){
     // Fires only if an event is available
 
     // Handle events
-    switch (mEvent.type){
+    switch (mEvent.key.keysym.sym){
         case SDLK_ESCAPE:
             Quit();
             break;
@@ -38,14 +43,25 @@ void Application::Input(){
 
 void Application::Update(){
 
-    // Add gravity
-    mPlayer.dy += cGravity;
-
     // Check collisions
+    if(checkCollisions(mPlayer.rect, mGround.rect)){
+        
+        mPlayer.dy = -mPlayer.dy;
+        
+    }
+
+    // Add gravity
+    if(mPlayer.FALLING) mPlayer.dy += cGravity;
+
+    // Limit speed
+    if(mPlayer.dx > mPlayer.dxMax) mPlayer.dx = mPlayer.dxMax;
+    if(mPlayer.dy > mPlayer.dyMax) mPlayer.dy = mPlayer.dyMax;
 
     // Update position
-    mPlayer.rect.x += mPlayer.dx;
-    mPlayer.rect.y += mPlayer.dy;
+    mPlayer.rect.x += mPlayer.dx * miDeltaTime * 0.01f;
+    mPlayer.rect.y += mPlayer.dy * miDeltaTime * 0.01f;
+    
+    
 }
 
 

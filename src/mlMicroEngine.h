@@ -20,8 +20,8 @@ https://github.com/matiaslanzi/MicroEngine
 
 #pragma region version_history
 /*
-    Yes I know I need to start versioning, I'll get to that ASAP
-*/
+ * one day
+ */
 #pragma endregion
 
 
@@ -37,6 +37,9 @@ https://github.com/matiaslanzi/MicroEngine
 #pragma endregion
 
 
+
+
+
 #pragma region defines
 /* ------------------------------------------------------------------------- */
 /*                                  Defines                                  */
@@ -45,13 +48,13 @@ https://github.com/matiaslanzi/MicroEngine
 #pragma endregion
 
 
-
-
 /* ------------------------------------------------------------------------- */
 /*                             Interface declaration                         */
 /* ------------------------------------------------------------------------- */
 
 namespace mlME{
+
+    enum{UP,DOWN,LEFT,RIGHT};
 
     class mlMicroEngine{
 
@@ -60,7 +63,7 @@ namespace mlME{
         SDL_Renderer*   mpRenderer = nullptr;
         SDL_Event       mEvent;
         
-        float       mfSkipTicks = 1000/30;      // Frame rate
+        float       mfSkipTicks = 1000/60;      // Frame rate
         Uint32      miDeltaTime = 0;            // Time between frames, use this to compensate for timing.
         Uint32      miFrameFinish = 0;          // Last time a frame finished rendering
         Uint32      miFrameCount = 0;           // Accumulative counter
@@ -71,6 +74,8 @@ namespace mlME{
         virtual void Input() = 0;
         virtual void Update() = 0;
         virtual void Draw() = 0;
+
+        bool    checkCollisions(SDL_Rect& a, SDL_Rect& b);
         
         void    Runloop();
 
@@ -130,6 +135,18 @@ namespace mlME{
         mRunning = true;
     }
 
+
+
+    /* ----- CheckCollisions ----- */
+
+    bool mlMicroEngine::checkCollisions(SDL_Rect& a, SDL_Rect& b){
+        if(((a.x + a.w) >= b.x && a.x <= (b.x + b.w)) && ((a.y + a.h) >= b.y && a.y <= (b.y + b.h)))
+            return true;
+
+        return false;
+    }
+
+
     /* ----- Run loop ----- */
     void mlMicroEngine::Runloop(){
         
@@ -153,7 +170,7 @@ namespace mlME{
                 SDL_RenderPresent(mpRenderer);
                 
                 miFrameCount++;
-                miDeltaTime = SDL_GetTicks() - miFrameFinish;
+                miDeltaTime = SDL_GetTicks() - miFrameFinish;  // Milliseconds
                 miFrameFinish = SDL_GetTicks();
             }
             
