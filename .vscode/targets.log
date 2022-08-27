@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Mon Aug 22 01:41:54 2022
+# Make data base, printed on Sat Aug 27 11:06:04 2022
 
 # Variables
 
@@ -25,7 +24,7 @@ ELECTRON_NO_ATTACH_CONSOLE = 1
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/matiaslanzi/Github/MicroEngine
+CURDIR := /Users/matiaslanzi/GitHub/MicroEngine
 # makefile
 SHELL = /bin/sh
 # environment
@@ -37,9 +36,9 @@ MAKEFILE_LIST :=  Makefile
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_CWD = /Users/matiaslanzi/Github/MicroEngine
+VSCODE_CWD = /Users/matiaslanzi/GitHub/MicroEngine
 # environment
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 14)
@@ -47,11 +46,11 @@ INCLUDE_PATHS = -Iinclude
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.0zLh8md4fu/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.kDTGmlMIYE/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /Users/matiaslanzi/Github/MicroEngine
+PWD = /Users/matiaslanzi/GitHub/MicroEngine
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # makefile (from `Makefile', line 13)
@@ -69,7 +68,7 @@ VSCODE_CODE_CACHE_PATH = /Users/matiaslanzi/Library/Application Support/Code/Cac
 # environment
 LOGNAME = matiaslanzi
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -95,7 +94,7 @@ USER = matiaslanzi
 # makefile
 .DEFAULT_GOAL := all
 # environment
-TERM_SESSION_ID = 6230C20A-3C85-42C3-98E6-4ACA99BB6079
+TERM_SESSION_ID = E59EACD8-E164-4D97-8D9C-ADC574E4D9BA
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -105,7 +104,7 @@ TERM_PROGRAM = Apple_Terminal
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/0h/9dfttl3s19s9qysx969jfbmm0000gn/T/
+TMPDIR = /var/folders/7h/05fhgdrd305d9vhgs5vn5d140000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
@@ -119,9 +118,9 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 445
+TERM_PROGRAM_VERSION = 440
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.3476484.3476490.478807CB-0896-4CFA-91E4-85371FD9F062
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.122755824.122755830.5C2AFCB3-8018-4141-8B28-2F96FC0BD0C4
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -157,7 +156,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 78350
+VSCODE_PID = 1439
 # variable set hash-table stats:
 # Load=73/1024=7%, Rehash=0, Collisions=1/108=1%
 
@@ -167,10 +166,10 @@ VSCODE_PID = 78350
 
 # Directories
 
-# . (device 16777223, inode 2845721): 19 files, no impossibilities.
-# src (device 16777223, inode 2869055): 5 files, no impossibilities.
+# . (device 16777220, inode 122744542): 14 files, no impossibilities.
+# src (device 16777220, inode 122744626): 5 files, no impossibilities.
 
-# 24 files, no impossibilities in 2 directories.
+# 19 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -216,7 +215,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-10 15:39:42
+#  Last modified 2022-08-20 21:34:45
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -250,6 +249,6 @@ clean:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Aug 22 01:41:54 2022
+# Finished Make data base on Sat Aug 27 11:06:04 2022
 
  

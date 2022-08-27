@@ -75,32 +75,35 @@ void Application::Update(){
 
     // Move
     if(mDir == mlME::LEFT){
-        mPlayer.dx -= mPlayer.latVel;
-
+        mPlayer.dx += -mPlayer.latVel;
         mDir = mlME::NONE;
     }
 
     if(mDir == mlME::RIGHT){
         mPlayer.dx += mPlayer.latVel;
-
         mDir = mlME::NONE;
     }
 
-    
-
-    // Add gravity
+    // Gravity
     if(mPlayer.FALLING) mPlayer.dy += cGravity;
-
+    
+    // Friction
+    if(mPlayer.dx != 0) mPlayer.dx *= 0.95f;
+    
     // Limit speed
     if(mPlayer.dx > mPlayer.dxMax) mPlayer.dx = mPlayer.dxMax;
     if(mPlayer.dy > mPlayer.dyMax) mPlayer.dy = mPlayer.dyMax;
 
-    // Drag
-    mPlayer.dx *= 0.95f;
-
     // Stay in bounds
-    if(mPlayer.rect.x + mPlayer.rect.w >= 640) mPlayer.dx = -mPlayer.dx;
-    if(mPlayer.rect.x <= 0) mPlayer.dx = -mPlayer.dx;
+    if(mPlayer.rect.x + mPlayer.rect.w >= 640){
+        mPlayer.rect.x += -1;
+        mPlayer.dx = -mPlayer.dx;
+    }
+
+    if(mPlayer.rect.x <= 0){
+         mPlayer.rect.x += 1;  
+         mPlayer.dx = -mPlayer.dx;
+    }
 
     // Update position
     mPlayer.rect.x += mPlayer.dx * miDeltaTime * 0.01f;
