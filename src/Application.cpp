@@ -130,15 +130,18 @@ void Application::Draw(){
 
 
 
+/* ----- Destructor ----- */
+// This is the main destructor for the parent class
+// since it's a virtual function.
 
 Application::~Application(){
     
-    if(mpRenderer){
+    if(mpRenderer != nullptr){
         SDL_DestroyRenderer(mpRenderer);
         mpRenderer = nullptr;
     }
 
-    if(mpWindow){
+    if(mpWindow != nullptr){
         SDL_DestroyWindow(mpWindow);
         mpWindow = nullptr;
     }

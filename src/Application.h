@@ -33,16 +33,15 @@ private:
         float       dyMax = 50;         // Maximum y velocity
         float       jumpVel = 50;       // Jump velocity
         float       latVel  = 10;       // Lateral velocity
+        float       gravity = 1;        // Gravity multiplier
 
         SDL_Color color = {0xff, 0xff, 0xff, 0xff};     // The draw color
 
         // Collisions 0 = no collisions, 1 = collides, > 1 collision groups.
         int    coll = true;
-
-        bool FALLING = false;
-        bool JUMP = false;
-        bool GROUNDED = false;
-        
+        bool    FALLING = false;
+        bool    JUMP = false;
+        bool    GROUNDED = false;
     };
 
     struct MEEntity mPlayer;

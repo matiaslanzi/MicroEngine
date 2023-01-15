@@ -11,6 +11,7 @@ This is a first pass at attempting to make a basic mini game engine
 with SDL that can get me going quicly without much fuzz.
 You should be able to compile this in any platform with make.
 Read the docs for details.
+
 https://github.com/matiaslanzi/MicroEngine
 */
 #pragma endregion
@@ -20,7 +21,9 @@ https://github.com/matiaslanzi/MicroEngine
 
 #pragma region version_history
 /*
- * one day
+ * 230115 @TODO: we might want to move this section to a separate file
+ * 230115 @TODO: implement DearIamGui for gui elements and debuging
+ * 230115 @TODO: implement openGL
  */
 #pragma endregion
 
@@ -32,8 +35,10 @@ https://github.com/matiaslanzi/MicroEngine
 /* ------------------------------------------------------------------------- */
 /*                                  Includes                                 */
 /* ------------------------------------------------------------------------- */
+
 #include <stdio.h>
 #include <SDL2/SDL.h>
+
 #pragma endregion
 
 
@@ -44,7 +49,11 @@ https://github.com/matiaslanzi/MicroEngine
 /* ------------------------------------------------------------------------- */
 /*                                  Defines                                  */
 /* ------------------------------------------------------------------------- */
+/* Settings here                                                             */
+
 #define DEBUG
+#define ME_FPS 60
+
 #pragma endregion
 
 
@@ -57,14 +66,13 @@ namespace mlME{
     enum direction {NONE, UP, DOWN, LEFT, RIGHT};
 
     class mlMicroEngine{
-
     public:
         SDL_Window*     mpWindow = nullptr;
         SDL_Renderer*   mpRenderer = nullptr;   
         SDL_Event       mEvent;                 // The event
         Uint32          mDir;                   // Move directions
         
-        float       mfSkipTicks = 1000/60;      // Frame rate
+        float       mfSkipTicks = 1000/ME_FPS;  // Frame rate
         Uint32      miDeltaTime = 0;            // Time between frames, use this to compensate for timing.
         Uint32      miFrameFinish = 0;          // Last time a frame finished rendering
         Uint32      miFrameCount = 0;           // Accumulative counter
@@ -132,11 +140,9 @@ namespace mlME{
 
         // Initialize the last frame time.
         miFrameFinish = SDL_GetTicks();
-        
+
         mRunning = true;
     }
-
-
 
     /* ----- CheckCollisions ----- */
 
@@ -147,14 +153,18 @@ namespace mlME{
         return false;
     }
 
-
     /* ----- Run loop ----- */
     void mlMicroEngine::Runloop(){
         
         // Run the loop
         while (mRunning) {
             
-            // Cap the fps
+            // @TODO:
+            // Conrfirm and Fix this timing mechanism.
+            // I need a way to test it, make sure we don't visual drops.
+            // I don't think we are currentyl experiencing smooth
+            // interpolation.
+
             if(SDL_GetTicks() > miFrameFinish + mfSkipTicks){
 
                 if(SDL_PollEvent(&mEvent)){
