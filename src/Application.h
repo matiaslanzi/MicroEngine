@@ -44,6 +44,11 @@ private:
         bool    GROUNDED = false;
     };
 
+    struct MECamera{
+        SDL_Rect rect = {0,0,0,0};
+    };
+
+
     struct MEEntity mPlayer;
     struct MEEntity mGround;
 };
