@@ -1,4 +1,3 @@
-//
 //  Application.cpp
 //
 //  Created by Matias Lanzi on 8/9/22.
@@ -6,10 +5,12 @@
 // This is the application, this is where you write your game code.
 // The constructor get called once, Update() and Draw() get called at 
 // the defined frame rate in mlMicroEngine.h
-//
 
 #include "Application.h"
 
+
+
+/* ----- Constructor ----- */
 Application::Application(){
 
     mPlayer.rect.x = 100;
@@ -28,9 +29,11 @@ Application::Application(){
     
 }
 
-void Application::Input(){
-    // Fires only if an event is available
 
+
+
+/* ----- Input ----- */
+void Application::Input(){
     // Handle events
     switch (mEvent.key.keysym.sym){
         case SDLK_ESCAPE:
@@ -53,6 +56,10 @@ void Application::Input(){
     }
 }
 
+
+
+
+/* ----- Update ----- */
 void Application::Update(){
 
     // Check collisions
@@ -106,15 +113,11 @@ void Application::Update(){
     }
 
     // Update position
-    mPlayer.rect.x += mPlayer.dx * miDeltaTime * 0.01f;
-    mPlayer.rect.y += mPlayer.dy * miDeltaTime * 0.01f;
-    
-    
+    mPlayer.rect.x += mPlayer.dx * mfDeltaTime * 0.01f;
+    mPlayer.rect.y += mPlayer.dy * mfDeltaTime * 0.01f;    
 }
 
-
-
-
+/* ----- Draw ----- */
 void Application::Draw(){
 
     // Render object
@@ -126,7 +129,6 @@ void Application::Draw(){
     SDL_SetRenderDrawColor(mpRenderer, mPlayer.color.r, mPlayer.color.g,mPlayer.color.b, mPlayer.color.a);
     SDL_RenderDrawRect(mpRenderer, &mPlayer.rect);
 }
-
 
 
 
@@ -149,6 +151,9 @@ Application::~Application(){
     SDL_Quit();
 }
 
+
+
+/* ----- main ----- */
 int main(int argc, const char * argv[]) {
     
     Application* myApplication = new Application();

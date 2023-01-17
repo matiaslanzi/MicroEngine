@@ -69,13 +69,13 @@ namespace mlME{
     public:
         SDL_Window*     mpWindow = nullptr;
         SDL_Renderer*   mpRenderer = nullptr;   
-        SDL_Event       mEvent;                 // The event
-        Uint32          mDir;                   // Move directions
+        SDL_Event       mEvent;                     // The event
+        Uint32          mDir;                       // Move directions
         
-        float       mfSkipTicks = 1000/ME_FPS;  // Frame rate
-        Uint32      miDeltaTime = 0;            // Time between frames, use this to compensate for timing.
-        Uint32      miFrameFinish = 0;          // Last time a frame finished rendering
-        Uint32      miFrameCount = 0;           // Accumulative counter
+        float      mfFrameDuration = 1000/ME_FPS;   // The duration of a frame.
+        float      mfDeltaTime = 0;                 // Time between frames, use this to compensate for timing.
+        float      mfFrameFinish = 0;               // Last time a frame finished rendering
+        float      mfFrameCount = 0;                // Accumulative counter
     
         mlMicroEngine();
         virtual ~mlMicroEngine(){};
@@ -116,7 +116,7 @@ namespace mlME{
         }
         
         // Make window
-        mpWindow = SDL_CreateWindow("Untitled",
+        mpWindow = SDL_CreateWindow("TODO: Name me correcly!",
                                     SDL_WINDOWPOS_CENTERED,
                                     SDL_WINDOWPOS_CENTERED,
                                     640,
@@ -139,7 +139,7 @@ namespace mlME{
         SDL_SetRenderDrawColor(mpRenderer, 0xff, 0x00, 0x00, 0xff);
 
         // Initialize the last frame time.
-        miFrameFinish = SDL_GetTicks();
+        mfFrameFinish = SDL_GetTicks();
 
         mRunning = true;
     }
@@ -147,45 +147,47 @@ namespace mlME{
     /* ----- CheckCollisions ----- */
 
     bool mlMicroEngine::checkCollisions(SDL_Rect& a, SDL_Rect& b){
+        // Should be pretty self explanatory if you breifly think about it, might be a better way?
+        // @TODO: Put this in physics class
         if(((a.x + a.w) >= b.x && a.x <= (b.x + b.w)) && ((a.y + a.h) >= b.y && a.y <= (b.y + b.h)))
             return true;
-
         return false;
     }
 
     /* ----- Run loop ----- */
     void mlMicroEngine::Runloop(){
         
-        // Run the loop
+        // Run the loop as fast as possible!
         while (mRunning) {
-            
-            // @TODO:
-            // Conrfirm and Fix this timing mechanism.
-            // I need a way to test it, make sure we don't visual drops.
-            // I don't think we are currentyl experiencing smooth
-            // interpolation.
 
-            if(SDL_GetTicks() > miFrameFinish + mfSkipTicks){
+            if(SDL_GetTicks() > mfFrameFinish + mfFrameDuration){ // Only if the mfFrameDuration elapsed
 
-                if(SDL_PollEvent(&mEvent)){
-                    if(mEvent.type == SDL_QUIT) mRunning = false;
-
-                    Input();    // Only fire if an event was received
+                // Handle input
+                if(SDL_PollEvent(&mEvent)){ // Only fire if an event was received
+                    if(mEvent.type == SDL_QUIT){ 
+                        mRunning = false;
+                        return;
+                    }
+                    
+                    Input();    // Delegate to the application, inspect mEvent it's an SDL_Event.
                 }
                 
-                Update();
+                // Handle Update
+                Update();       // Delegate to the application.
 
+                // Handle Render
                 SDL_SetRenderDrawColor(mpRenderer, 0x00, 0x00, 0x00, 0x00);
                 SDL_RenderClear(mpRenderer);
-                Draw();
+                Draw();         // Delegate to the application.
                 SDL_RenderPresent(mpRenderer);
                 
-                miFrameCount++;
-                miDeltaTime = SDL_GetTicks() - miFrameFinish;  // Milliseconds
-                miFrameFinish = SDL_GetTicks();
+                // End of frame, update variables
+                mfFrameCount++;
+                mfDeltaTime = SDL_GetTicks() - mfFrameFinish;  // Milliseconds
+                mfFrameFinish = SDL_GetTicks();
             }
             
-            SDL_Delay(1);
+            SDL_Delay(1);   // Let the processor breathe
         }
     }
 
