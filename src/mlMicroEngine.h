@@ -76,7 +76,7 @@ namespace mlME{
     public:
         SDL_Window*     mpWindow = nullptr;
         SDL_Renderer*   mpRenderer = nullptr;   
-        SDL_Event       mEvent;                          // The event
+        SDL_Event       mEvent;                     // The event
         
         Uint32      mfSkipTicks = 1000.f/ME_FPS;    // Frame duration in ms acording to frame rate
         float       mfDeltaTime = 0;                // Time between frames, in seconds.
