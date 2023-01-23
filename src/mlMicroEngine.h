@@ -150,7 +150,7 @@ namespace mlME{
         SDL_SetRenderDrawColor(mpRenderer, 0xff, 0x00, 0x00, 0xff);
 
         // Initialize the last frame time.
-        miFrameFinish = SDL_GetTicks();
+        mfFrameFinish = SDL_GetTicks();
 
         mRunning = true;
     }
@@ -160,22 +160,30 @@ namespace mlME{
     /* ----- Run loop ----- */
     void mlMicroEngine::Runloop(){
         
-        // Run the loop
+        // Run the loop as fast as possible!
         while (mRunning) {
 
             if(SDL_GetTicks() > miFrameFinish + mfSkipTicks){ // Cap the frame rate
 
-                if(SDL_PollEvent(&mEvent)){
-                    if(mEvent.type == SDL_QUIT) mRunning = false;
+            if(SDL_GetTicks() > mfFrameFinish + mfFrameDuration){ // Only if the mfFrameDuration elapsed
 
-                    Input();    // Only fire if an event was received
+                // Handle input
+                if(SDL_PollEvent(&mEvent)){ // Only fire if an event was received
+                    if(mEvent.type == SDL_QUIT){ 
+                        mRunning = false;
+                        return;
+                    }
+                    
+                    Input();    // Delegate to the application, inspect mEvent it's an SDL_Event.
                 }
                 
-                Update();
+                // Handle Update
+                Update();       // Delegate to the application.
 
+                // Handle Render
                 SDL_SetRenderDrawColor(mpRenderer, 0x00, 0x00, 0x00, 0x00);
                 SDL_RenderClear(mpRenderer);
-                Draw();
+                Draw();         // Delegate to the application.
                 SDL_RenderPresent(mpRenderer);
                 
                 miFrameCount++;
@@ -183,7 +191,7 @@ namespace mlME{
                 miFrameFinish = SDL_GetTicks();
             }
             
-            SDL_Delay(1);
+            SDL_Delay(1);   // Let the processor breathe
         }
     }
 

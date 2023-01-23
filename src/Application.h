@@ -12,6 +12,8 @@
 #include "mlMicroEngine.h"
 
 class Application : public mlME::mlMicroEngine{
+    // The application subclasses the engine.
+    // Provide Input, Update and Draw methods.
 
 public:
     Application();

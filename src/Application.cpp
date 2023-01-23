@@ -1,4 +1,3 @@
-//
 //  Application.cpp
 //
 //  Created by Matias Lanzi on 8/9/22.
@@ -6,10 +5,12 @@
 // This is the application, this is where you write your game code.
 // The constructor get called once, Update() and Draw() get called at 
 // the defined frame rate in mlMicroEngine.h
-//
 
 #include "Application.h"
 
+
+
+/* ----- Constructor ----- */
 Application::Application(){
 
     
@@ -27,9 +28,7 @@ void Application::Update(){
     
 }
 
-
-
-
+/* ----- Draw ----- */
 void Application::Draw(){
     // Clear the cosole
     trace("\033[2J");
@@ -51,6 +50,9 @@ Application::~Application(){
     
 }
 
+
+
+/* ----- main ----- */
 int main(int argc, const char * argv[]) {
     
     Application* myApplication = new Application();
