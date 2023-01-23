@@ -103,14 +103,6 @@ namespace mlME{
 }
 
 
-
-
-
-
-
-
-
-
 /* ------------------------------------------------------------------------- */
 /*                             Implementation                                */
 /* ------------------------------------------------------------------------- */
@@ -150,7 +142,7 @@ namespace mlME{
         SDL_SetRenderDrawColor(mpRenderer, 0xff, 0x00, 0x00, 0xff);
 
         // Initialize the last frame time.
-        mfFrameFinish = SDL_GetTicks();
+        miFrameFinish = SDL_GetTicks();
 
         mRunning = true;
     }
@@ -163,12 +155,10 @@ namespace mlME{
         // Run the loop as fast as possible!
         while (mRunning) {
 
-            if(SDL_GetTicks() > miFrameFinish + mfSkipTicks){ // Cap the frame rate
-
-            if(SDL_GetTicks() > mfFrameFinish + mfFrameDuration){ // Only if the mfFrameDuration elapsed
+            if(SDL_GetTicks() > miFrameFinish + mfSkipTicks){ // Cap the frame rate 
 
                 // Handle input
-                if(SDL_PollEvent(&mEvent)){ // Only fire if an event was received
+                if(SDL_PollEvent(&mEvent)){     // Only fire if an event was received
                     if(mEvent.type == SDL_QUIT){ 
                         mRunning = false;
                         return;
