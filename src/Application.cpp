@@ -17,7 +17,6 @@ Application::Application(){
 
 void Application::Input(){
     // Fires only if an event is available
-
     switch (mEvent.key.keysym.sym){
         case SDLK_ESCAPE: Quit(); break;
         default: break;

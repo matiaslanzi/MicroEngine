@@ -2,16 +2,12 @@
 #define MLMICROENGINE_H
 
 #pragma region license_and_help
-/*  
-    mlMicroEngine.h
-
- Created by Matias Lanzi on 8/9/22.
-
+/* mlMicroEngine.h
+Created by Matias Lanzi on 8/9/22.
 This is a first pass at attempting to make a basic mini game engine
 with SDL that can get me going quicly without much fuzz.
 You should be able to compile this in any platform with make.
 Read the docs for details.
-
 https://github.com/matiaslanzi/MicroEngine
 */
 #pragma endregion
@@ -20,9 +16,7 @@ https://github.com/matiaslanzi/MicroEngine
 
 
 #pragma region version_history
-/*
- * 230115 @TODO: we might want to move this section to a separate file
- * 230115 @TODO: implement DearIamGui for gui elements and debuging
+/* 230115 @TODO: implement DearIamGui for gui elements and debuging
  * 230115 @TODO: implement openGL
  */
 #pragma endregion
@@ -66,11 +60,20 @@ https://github.com/matiaslanzi/MicroEngine
 #pragma endregion
 
 
+
+
+
+
+
+
+
 /* ------------------------------------------------------------------------- */
 /*                             Interface declaration                         */
 /* ------------------------------------------------------------------------- */
 
 namespace mlME{
+
+    bool CheckCollisions(SDL_Rect& a, SDL_Rect& b);
 
     class mlMicroEngine{
     public:
@@ -90,7 +93,6 @@ namespace mlME{
         virtual void Update() = 0;
         virtual void Draw() = 0;
 
-        bool    checkCollisions(SDL_Rect& a, SDL_Rect& b);  // Move this to physics class
         void    Runloop();
         void    Quit();
       
@@ -117,7 +119,6 @@ namespace mlME{
 
     /* ----- Constructor ----- */
     mlMicroEngine::mlMicroEngine(){
-        // TODO: @matiaslanzi Overload the constructor to take parameters x, y, framerate and title.
 
         // Init SDL
         if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
@@ -154,15 +155,6 @@ namespace mlME{
         mRunning = true;
     }
 
-    /* ----- CheckCollisions ----- */
-    // @TODO:Move this to utilities or physics class
-
-    bool mlMicroEngine::checkCollisions(SDL_Rect& a, SDL_Rect& b){
-        if(((a.x + a.w) >= b.x && a.x <= (b.x + b.w)) && ((a.y + a.h) >= b.y && a.y <= (b.y + b.h)))
-            return true;
-
-        return false;
-    }
 
 
     /* ----- Run loop ----- */
@@ -197,7 +189,6 @@ namespace mlME{
 
     /* ----- Quit ----- */
     void mlMicroEngine::Quit(){
-        trace("mlMicroEngine::Quit\n");
 
         mRunning = false;
 
@@ -213,6 +204,13 @@ namespace mlME{
 
         SDL_Quit();
 
+    }
+
+    /* ----- CheckCollisions ----- */
+    bool CheckCollisions(SDL_Rect& a, SDL_Rect& b){
+        if(((a.x + a.w) >= b.x && a.x <= (b.x + b.w)) && ((a.y + a.h) >= b.y && a.y <= (b.y + b.h)))
+            return true;
+        return false;
     }
 }
 
