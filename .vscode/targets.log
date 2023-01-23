@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Sun Jan 15 01:11:08 2023
+# Make data base, printed on Sun Jan 22 20:26:46 2023
 
 # Variables
 
@@ -46,7 +46,7 @@ INCLUDE_PATHS = -Iinclude
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.tY6AqtcIzg/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.P4fw3JmjZt/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -92,7 +92,7 @@ USER = matiaslanzi
 # makefile
 .DEFAULT_GOAL := all
 # environment
-TERM_SESSION_ID = 38E0DC09-111A-4ADA-A7E9-F1BC9F07808A
+TERM_SESSION_ID = 6523B561-80C8-425C-9A21-740BB04C0745
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -118,7 +118,7 @@ MFLAGS = -Rrqp
 # environment
 TERM_PROGRAM_VERSION = 440
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.128931499.128931505.D7A24207-F3C2-429B-81C9-407C31A3D035
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.128931499.128931505.C128F422-BDCF-4589-83ED-8EAFD69C287F
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -154,7 +154,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 3791
+VSCODE_PID = 1744
 # variable set hash-table stats:
 # Load=72/1024=7%, Rehash=0, Collisions=1/107=1%
 
@@ -247,6 +247,6 @@ clean:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Jan 15 01:11:08 2023
+# Finished Make data base on Sun Jan 22 20:26:46 2023
 
  

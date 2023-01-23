@@ -52,7 +52,16 @@ https://github.com/matiaslanzi/MicroEngine
 /* Settings here                                                             */
 
 #define DEBUG
-#define ME_FPS 60
+#define ME_FPS 24
+#define ME_WIN_WIDTH 640
+#define ME_WIN_HEIGHT 480
+#define ME_WIN_TITLE "Untitled"
+
+#ifdef DEBUG
+#define trace(...) printf( __VA_ARGS__ )
+#else
+#define trace(...)
+#endif
 
 #pragma endregion
 
@@ -63,19 +72,16 @@ https://github.com/matiaslanzi/MicroEngine
 
 namespace mlME{
 
-    enum direction {NONE, UP, DOWN, LEFT, RIGHT};
-
     class mlMicroEngine{
     public:
         SDL_Window*     mpWindow = nullptr;
         SDL_Renderer*   mpRenderer = nullptr;   
-        SDL_Event       mEvent;                 // The event
-        Uint32          mDir;                   // Move directions
+        SDL_Event       mEvent;                          // The event
         
-        float       mfSkipTicks = 1000/ME_FPS;  // Frame rate
-        Uint32      miDeltaTime = 0;            // Time between frames, use this to compensate for timing.
-        Uint32      miFrameFinish = 0;          // Last time a frame finished rendering
-        Uint32      miFrameCount = 0;           // Accumulative counter
+        Uint32      mfSkipTicks = 1000.f/ME_FPS;    // Frame duration in ms acording to frame rate
+        float       mfDeltaTime = 0;                // Time between frames, in seconds.
+        Uint32      miFrameFinish = 0;              // Last time a frame finished rendering
+        Uint32      miFrameCount = 0;               // Accumulative counter
     
         mlMicroEngine();
         virtual ~mlMicroEngine(){};
@@ -84,17 +90,21 @@ namespace mlME{
         virtual void Update() = 0;
         virtual void Draw() = 0;
 
-        bool    checkCollisions(SDL_Rect& a, SDL_Rect& b);
-        
+        bool    checkCollisions(SDL_Rect& a, SDL_Rect& b);  // Move this to physics class
         void    Runloop();
-
         void    Quit();
-        
+      
     private:
         bool    mRunning = false;
     };
 
 }
+
+
+
+
+
+
 
 
 
@@ -116,11 +126,11 @@ namespace mlME{
         }
         
         // Make window
-        mpWindow = SDL_CreateWindow("Untitled",
+        mpWindow = SDL_CreateWindow(ME_WIN_TITLE,
                                     SDL_WINDOWPOS_CENTERED,
                                     SDL_WINDOWPOS_CENTERED,
-                                    640,
-                                    480,
+                                    ME_WIN_WIDTH,
+                                    ME_WIN_HEIGHT,
                                     SDL_WINDOW_SHOWN);
         if(!mpWindow){
             printf("mlMicroEngine: Can't create SDL window.\n%s", SDL_GetError());
@@ -145,6 +155,7 @@ namespace mlME{
     }
 
     /* ----- CheckCollisions ----- */
+    // @TODO:Move this to utilities or physics class
 
     bool mlMicroEngine::checkCollisions(SDL_Rect& a, SDL_Rect& b){
         if(((a.x + a.w) >= b.x && a.x <= (b.x + b.w)) && ((a.y + a.h) >= b.y && a.y <= (b.y + b.h)))
@@ -153,19 +164,14 @@ namespace mlME{
         return false;
     }
 
+
     /* ----- Run loop ----- */
     void mlMicroEngine::Runloop(){
         
         // Run the loop
         while (mRunning) {
-            
-            // @TODO:
-            // Conrfirm and Fix this timing mechanism.
-            // I need a way to test it, make sure we don't visual drops.
-            // I don't think we are currentyl experiencing smooth
-            // interpolation.
 
-            if(SDL_GetTicks() > miFrameFinish + mfSkipTicks){
+            if(SDL_GetTicks() > miFrameFinish + mfSkipTicks){ // Cap the frame rate
 
                 if(SDL_PollEvent(&mEvent)){
                     if(mEvent.type == SDL_QUIT) mRunning = false;
@@ -181,7 +187,7 @@ namespace mlME{
                 SDL_RenderPresent(mpRenderer);
                 
                 miFrameCount++;
-                miDeltaTime = SDL_GetTicks() - miFrameFinish;  // Milliseconds
+                mfDeltaTime = (SDL_GetTicks() - miFrameFinish) / 1000.f;  // Calculate deltaTime in seconds
                 miFrameFinish = SDL_GetTicks();
             }
             
@@ -189,8 +195,24 @@ namespace mlME{
         }
     }
 
+    /* ----- Quit ----- */
     void mlMicroEngine::Quit(){
+        trace("mlMicroEngine::Quit\n");
+
         mRunning = false;
+
+        if(mpRenderer != nullptr){
+            SDL_DestroyRenderer(mpRenderer);
+            mpRenderer = nullptr;
+        }
+
+        if(mpWindow != nullptr){
+            SDL_DestroyWindow(mpWindow);
+            mpWindow = nullptr;
+        }
+
+        SDL_Quit();
+
     }
 }
 
