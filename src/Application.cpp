@@ -59,7 +59,7 @@ int main(int argc, const char * argv[]) {
     
     Application* myApplication = new Application();
 
-    myApplication->Runloop();
+    myApplication->RunLoop();
     
     delete myApplication;
 

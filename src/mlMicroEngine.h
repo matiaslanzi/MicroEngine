@@ -68,17 +68,119 @@ https://github.com/matiaslanzi/MicroEngine
 
 
 /* ------------------------------------------------------------------------- */
-/*                             Interface declaration                         */
+/*                                  Classes                                  */
 /* ------------------------------------------------------------------------- */
 
 namespace ml{
 
-    struct vector2D{ float x, y; };
-    struct vector3D{ float x, y, z; };
+    // Data structures
+    struct vec2D{ float x, y; };
+    struct vec3D{ float x, y, z; };
 
+    // Move this to Utilities or Physics class
     bool CheckCollisions(SDL_Rect& a, SDL_Rect& b);
 
-    /* ----- MicroEngine---------------------------------------------------- */
+
+
+
+
+
+
+// /* ----- Graphics ---------------------------------------------------------- */
+//     class Graphics{
+//         public:
+//             SDL_Window*     mpWindow = nullptr;
+//             SDL_Renderer*   mpRenderer = nullptr;   
+//         private:
+//     };
+
+
+
+
+
+
+
+
+// /* ----- Input ------------------------------------------------------------- */
+//     class Input{
+//         public:
+//             SDL_Event   mEvent;
+//         private:
+//     };
+
+
+
+
+
+
+
+
+// /* ----- Time -------------------------------------------------------------- */
+//     class Time{
+//         public:
+//             Uint32      mfSkipTicks = 1000.f/ME_FPS;    // Frame duration in ms acording to frame rate
+//             float       mfDeltaTime = 0;                // Time between frames, in seconds.
+//             Uint32      miFrameFinish = 0;              // Last time a frame finished rendering
+//             Uint32      miFrameCount = 0;               // Accumulative counter
+//         private:
+//     };
+
+
+
+
+
+
+
+
+
+// /* ----- Texture ----------------------------------------------------------- */
+//     class Texture{
+//         public:
+//             SDL_Texture* mpTexture;
+//         private:
+//     };
+
+
+
+
+
+
+
+
+
+// /* ----- Entity -------------------------------------------------------------*/
+//     class Entity{
+//        public:
+//         vec3D       mXPos, mYPos, mZPos = {0,0,0};
+//         vec3D       mXVel, mYVel, mZVel = {0,0,0};
+//         SDL_Rect    mRect = {0,0,0,0};
+//         SDL_Rect    mClipRect = {0,0,0,0};
+//      private:
+//     };
+
+
+
+
+
+
+
+// /* ----- StateManager -------------------------------------------------------*/
+// class StateManager{
+//     public:
+//     private:
+// };
+
+
+
+
+
+
+
+
+
+
+/* ----- MicroEngine-------------------------------------------------------- */
+
     class MicroEngine{
     public:
         // Move this to Graphics class
@@ -101,62 +203,14 @@ namespace ml{
         virtual void Update() = 0;
         virtual void Draw() = 0;
 
-        void    Runloop();
+        void    RunLoop();
         void    Quit();
       
     private:
         bool    mRunning = false;
     };
 
-    /* ----- Graphics ------------------------------------------------------ */
-    class Graphics{
-        public:
-            SDL_Window*     mpWindow = nullptr;
-            SDL_Renderer*   mpRenderer = nullptr;   
-        private:
-    };
-
-    /* ----- Input --------------------------------------------------------- */
-    class Input{
-        public:
-            SDL_Event   mEvent;
-        private:
-    };
-
-    /* ----- Time ---------------------------------------------------------- */
-    class Time{
-        public:
-            Uint32      mfSkipTicks = 1000.f/ME_FPS;    // Frame duration in ms acording to frame rate
-            float       mfDeltaTime = 0;                // Time between frames, in seconds.
-            Uint32      miFrameFinish = 0;              // Last time a frame finished rendering
-            Uint32      miFrameCount = 0;               // Accumulative counter
-        private:
-    };
-
-    /* ----- Texture ------------------------------------------------------- */
-    class Texture{
-        public:
-            SDL_Texture* mpTexture;
-        private:
-    };
-
-    /* ----- Entity ---------------------------------------------------------*/
-    class Entity{
-        SDL_Rect    mRect = {0,0,0,0};
-        SDL_Rect    mClipRect = {0,0,0,0};
-        float       mXVel, mYVel = 0;
-        
-    };
-}
-
-
-/* ------------------------------------------------------------------------- */
-/*                             Implementation                                */
-/* ------------------------------------------------------------------------- */
-
-namespace ml{
-
-    /* ----- Constructor ----- */
+    // ----- MicroEngine
     MicroEngine::MicroEngine(){
 
         // Init SDL
@@ -195,10 +249,8 @@ namespace ml{
         mRunning = true;
     }
 
-
-
-    /* ----- Run loop ----- */
-    void MicroEngine::Runloop(){
+    // ----- RunLoop
+    void MicroEngine::RunLoop(){
         
         // Run the loop as fast as possible!
         while (mRunning) {
@@ -234,7 +286,6 @@ namespace ml{
         }
     }
 
-    /* ----- Quit ----- */
     void MicroEngine::Quit(){
 
         mRunning = false;
@@ -253,8 +304,12 @@ namespace ml{
 
     }
 
-    /* ----- CheckCollisions ----- */
+
+
+    /* ----- Utilities ----------------------------------------------------- */
+
     bool CheckCollisions(SDL_Rect& a, SDL_Rect& b){
+        // Move this into physics class
         if(((a.x + a.w) >= b.x && a.x <= (b.x + b.w)) && ((a.y + a.h) >= b.y && a.y <= (b.y + b.h)))
             return true;
         return false;
