@@ -16,6 +16,7 @@ Application::Application(){
     
 }
 
+/* ----- Input ----- */
 void Application::Input(){
     // Fires only if an event is available
     switch (mEvent.key.keysym.sym){
@@ -24,6 +25,7 @@ void Application::Input(){
     }
 }
 
+/* ----- Update ----- */
 void Application::Update(){    
     
 }
@@ -34,7 +36,7 @@ void Application::Draw(){
     trace("\033[2J");
     // Move cursor to the top
     trace("\033[H");
-
+    trace("MicroEngine\n");
     trace("Frame count: % d \n", miFrameCount);
     trace("deltaTime: %f\n",mfDeltaTime);
 }
@@ -46,7 +48,7 @@ void Application::Draw(){
 
 Application::~Application(){
 
-    mlMicroEngine::Quit();
+    MicroEngine::Quit();
     
 }
 

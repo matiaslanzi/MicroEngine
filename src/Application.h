@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "mlMicroEngine.h"
 
-class Application : public mlME::mlMicroEngine{
+class Application : public ml::MicroEngine{
     // The application subclasses the engine.
     // Provide Input, Update and Draw methods.
 
@@ -22,7 +22,7 @@ public:
     void Input();
     void Update();
     void Draw();
-    
+
 private:
 };
 

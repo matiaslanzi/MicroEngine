@@ -71,23 +71,31 @@ https://github.com/matiaslanzi/MicroEngine
 /*                             Interface declaration                         */
 /* ------------------------------------------------------------------------- */
 
-namespace mlME{
+namespace ml{
+
+    struct vector2D{ float x, y; };
+    struct vector3D{ float x, y, z; };
 
     bool CheckCollisions(SDL_Rect& a, SDL_Rect& b);
 
-    class mlMicroEngine{
+    /* ----- MicroEngine---------------------------------------------------- */
+    class MicroEngine{
     public:
+        // Move this to Graphics class
         SDL_Window*     mpWindow = nullptr;
         SDL_Renderer*   mpRenderer = nullptr;   
+
+        // Move this to Input class
         SDL_Event       mEvent;                     // The event
         
+        // Move this to Time class
         Uint32      mfSkipTicks = 1000.f/ME_FPS;    // Frame duration in ms acording to frame rate
         float       mfDeltaTime = 0;                // Time between frames, in seconds.
         Uint32      miFrameFinish = 0;              // Last time a frame finished rendering
         Uint32      miFrameCount = 0;               // Accumulative counter
     
-        mlMicroEngine();
-        virtual ~mlMicroEngine(){};
+        MicroEngine();
+        virtual ~MicroEngine(){};
         
         virtual void Input() = 0;
         virtual void Update() = 0;
@@ -100,6 +108,45 @@ namespace mlME{
         bool    mRunning = false;
     };
 
+    /* ----- Graphics ------------------------------------------------------ */
+    class Graphics{
+        public:
+            SDL_Window*     mpWindow = nullptr;
+            SDL_Renderer*   mpRenderer = nullptr;   
+        private:
+    };
+
+    /* ----- Input --------------------------------------------------------- */
+    class Input{
+        public:
+            SDL_Event   mEvent;
+        private:
+    };
+
+    /* ----- Time ---------------------------------------------------------- */
+    class Time{
+        public:
+            Uint32      mfSkipTicks = 1000.f/ME_FPS;    // Frame duration in ms acording to frame rate
+            float       mfDeltaTime = 0;                // Time between frames, in seconds.
+            Uint32      miFrameFinish = 0;              // Last time a frame finished rendering
+            Uint32      miFrameCount = 0;               // Accumulative counter
+        private:
+    };
+
+    /* ----- Texture ------------------------------------------------------- */
+    class Texture{
+        public:
+            SDL_Texture* mpTexture;
+        private:
+    };
+
+    /* ----- Entity ---------------------------------------------------------*/
+    class Entity{
+        SDL_Rect    mRect = {0,0,0,0};
+        SDL_Rect    mClipRect = {0,0,0,0};
+        float       mXVel, mYVel = 0;
+        
+    };
 }
 
 
@@ -107,10 +154,10 @@ namespace mlME{
 /*                             Implementation                                */
 /* ------------------------------------------------------------------------- */
 
-namespace mlME{
+namespace ml{
 
     /* ----- Constructor ----- */
-    mlMicroEngine::mlMicroEngine(){
+    MicroEngine::MicroEngine(){
 
         // Init SDL
         if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
@@ -141,8 +188,9 @@ namespace mlME{
         
         SDL_SetRenderDrawColor(mpRenderer, 0xff, 0x00, 0x00, 0xff);
 
-        // Initialize the last frame time.
+        // Initialize the last frame time and delta time.
         miFrameFinish = SDL_GetTicks();
+        mfDeltaTime = mfSkipTicks;
 
         mRunning = true;
     }
@@ -150,7 +198,7 @@ namespace mlME{
 
 
     /* ----- Run loop ----- */
-    void mlMicroEngine::Runloop(){
+    void MicroEngine::Runloop(){
         
         // Run the loop as fast as possible!
         while (mRunning) {
@@ -176,6 +224,7 @@ namespace mlME{
                 Draw();         // Delegate to the application.
                 SDL_RenderPresent(mpRenderer);
                 
+                // Increment frame, calculate delta time and stamp frame finish.
                 miFrameCount++;
                 mfDeltaTime = (SDL_GetTicks() - miFrameFinish) / 1000.f;  // Calculate deltaTime in seconds
                 miFrameFinish = SDL_GetTicks();
@@ -186,7 +235,7 @@ namespace mlME{
     }
 
     /* ----- Quit ----- */
-    void mlMicroEngine::Quit(){
+    void MicroEngine::Quit(){
 
         mRunning = false;
 
