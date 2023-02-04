@@ -34,7 +34,6 @@ void Application::Input(){
     
     if(mEvent.type == SDL_KEYUP){
         switch (mEvent.key.keysym.sym){
-            case SDLK_ESCAPE: Quit(); break;
             case SDLK_UP: mJump = false; break;
             case SDLK_LEFT: mLeft = false; break;
             case SDLK_RIGHT: mRight = false; break;

@@ -23,12 +23,10 @@ public:
     void Update();
     void Draw();
 
+private:
     bool mJump;
     bool mLeft;
     bool mRight;
-
-    
-private:
 };
 
 #endif /* Application_h */
