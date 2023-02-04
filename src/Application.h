@@ -23,6 +23,11 @@ public:
     void Update();
     void Draw();
 
+    bool mJump;
+    bool mLeft;
+    bool mRight;
+
+    
 private:
 };
 

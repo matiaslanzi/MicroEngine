@@ -74,8 +74,7 @@ https://github.com/matiaslanzi/MicroEngine
 namespace ml{
 
     // Data structures
-    struct vec2D{ float x, y; };
-    struct vec3D{ float x, y, z; };
+    struct vec3D{ float x, y, z; };     // Use this for vec2D
 
     // Move this to Utilities or Physics class
     bool CheckCollisions(SDL_Rect& a, SDL_Rect& b);
@@ -85,28 +84,14 @@ namespace ml{
 
 
 
-
-// /* ----- Graphics ---------------------------------------------------------- */
-//     class Graphics{
-//         public:
-//             SDL_Window*     mpWindow = nullptr;
-//             SDL_Renderer*   mpRenderer = nullptr;   
-//         private:
-//     };
-
-
-
-
-
-
-
-
-// /* ----- Input ------------------------------------------------------------- */
-//     class Input{
-//         public:
-//             SDL_Event   mEvent;
-//         private:
-//     };
+    // @TODO make the class
+    // /* ----- Graphics ---------------------------------------------------------- */
+    //     class Graphics{
+    //         public:
+    //             SDL_Window*     mpWindow = nullptr;
+    //             SDL_Renderer*   mpRenderer = nullptr;   
+    //         private:
+    //     };
 
 
 
@@ -114,16 +99,13 @@ namespace ml{
 
 
 
-
-// /* ----- Time -------------------------------------------------------------- */
-//     class Time{
-//         public:
-//             Uint32      mfSkipTicks = 1000.f/ME_FPS;    // Frame duration in ms acording to frame rate
-//             float       mfDeltaTime = 0;                // Time between frames, in seconds.
-//             Uint32      miFrameFinish = 0;              // Last time a frame finished rendering
-//             Uint32      miFrameCount = 0;               // Accumulative counter
-//         private:
-//     };
+    // @TODO make the class
+    // /* ----- Input ------------------------------------------------------------- */
+    //     class Input{
+    //         public:
+    //             SDL_Event   mEvent;
+    //         private:
+    //     };
 
 
 
@@ -131,14 +113,16 @@ namespace ml{
 
 
 
-
-
-// /* ----- Texture ----------------------------------------------------------- */
-//     class Texture{
-//         public:
-//             SDL_Texture* mpTexture;
-//         private:
-//     };
+    // @TODO make the class
+    // /* ----- Time -------------------------------------------------------------- */
+    //     class Time{
+    //         public:
+    //             Uint32      mfSkipTicks = 1000.f/ME_FPS;    // Frame duration in ms acording to frame rate
+    //             float       mfDeltaTime = 0;                // Time between frames, in seconds.
+    //             Uint32      miFrameFinish = 0;              // Last time a frame finished rendering
+    //             Uint32      miFrameCount = 0;               // Accumulative counter
+    //         private:
+    //     };
 
 
 
@@ -148,27 +132,12 @@ namespace ml{
 
 
 
-// /* ----- Entity -------------------------------------------------------------*/
-//     class Entity{
-//        public:
-//         vec3D       mXPos, mYPos, mZPos = {0,0,0};
-//         vec3D       mXVel, mYVel, mZVel = {0,0,0};
-//         SDL_Rect    mRect = {0,0,0,0};
-//         SDL_Rect    mClipRect = {0,0,0,0};
-//      private:
-//     };
-
-
-
-
-
-
-
-// /* ----- StateManager -------------------------------------------------------*/
-// class StateManager{
-//     public:
-//     private:
-// };
+    // /* ----- Texture ----------------------------------------------------------- */
+    //     class Texture{
+    //         public:
+    //             SDL_Texture* mpTexture;
+    //         private:
+    //     };
 
 
 
@@ -178,8 +147,38 @@ namespace ml{
 
 
 
+    // /* ----- Entity -------------------------------------------------------------*/
+    //     class Entity{
+    //        public:
+    //         vec3D       mXPos, mYPos, mZPos = {0,0,0};
+    //         vec3D       mXVel, mYVel, mZVel = {0,0,0};
+    //         SDL_Rect    mRect = {0,0,0,0};
+    //         SDL_Rect    mClipRect = {0,0,0,0};
+    //      private:
+    //     };
 
-/* ----- MicroEngine-------------------------------------------------------- */
+
+
+
+
+
+    // @TODO make the class
+    // /* ----- StateManager -------------------------------------------------------*/
+    // class StateManager{
+    //     public:
+    //     private:
+    // };
+
+
+
+
+
+
+
+
+
+
+    /* ----- MicroEngine-------------------------------------------------------- */
 
     class MicroEngine{
     public:
