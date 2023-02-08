@@ -308,11 +308,24 @@ namespace ml{
     /* ----- Utilities ----------------------------------------------------- */
 
     bool CheckCollisions(SDL_Rect& a, SDL_Rect& b){
-        // Move this into physics class
         if(((a.x + a.w) >= b.x && a.x <= (b.x + b.w)) && ((a.y + a.h) >= b.y && a.y <= (b.y + b.h)))
             return true;
         return false;
     }
+
+    float Lerp(float a, float b, float t){
+        return ( 1.0f - t ) * a + b * t;
+    }
+
+    float InvLerp(float a, float b, float v){
+        return ( v - a) / ( b - a );
+    }
+
+    float Remap(float iMin, float iMax, float oMin, float oMax, float v){
+        float t = InvLerp(iMin, iMax, v);
+        return Lerp(oMin, oMax, t);
+    }
+
 }
 
 #endif /* mlMicroEngine_h */
