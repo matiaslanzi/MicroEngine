@@ -18,16 +18,16 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
     UNAME_M := $(shell uname -m)
     ifeq ($(UNAME_M),x86_64)
-		LINKER_FLAGS = -lSDL2
+		LINKER_FLAGS = -lSDL2 -lSDL2_ttf -lSDL2_image
 		INCLUDE_PATHS = -Iinclude/linux
 		LIBRARY_PATHS = -Llib/linux
     else
-		LINKER_FLAGS = -lSDL2
+		LINKER_FLAGS = -lSDL2 -lSDL2_ttf -lSDL2_image
 		INCLUDE_PATHS = -Iinclude/linux
 		LIBRARY_PATHS = -Llib/linux
     endif
 else ifeq ($(UNAME_S),Darwin)
-	LINKER_FLAGS = -lsdl2
+	LINKER_FLAGS = -lsdl2 -lsdl2_ttf -lsdl2_image
 	INCLUDE_PATHS = -Iinclude/macos
 	LIBRARY_PATHS = -Llib/macos
 else
